@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://fixfast-backend.onrender.com/api/:path*"
+    }
+  ]
+}
+

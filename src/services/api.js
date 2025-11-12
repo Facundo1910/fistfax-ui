@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-// En desarrollo, usa rutas relativas que serán proxeadas por react-scripts
-// En producción, usa la URL completa del backend
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? (process.env.REACT_APP_API_URL || 'https://fixfast-backend.onrender.com/api')
-  : '/api';
+// Usar rutas relativas que serán proxeadas:
+// - En desarrollo: por react-scripts (setupProxy.js)
+// - En producción: por Vercel (vercel.json)
+// Si se necesita usar una URL diferente, configurar REACT_APP_API_URL
+const API_BASE_URL = process.env.REACT_APP_API_URL || '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
