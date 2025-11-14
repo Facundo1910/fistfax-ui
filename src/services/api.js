@@ -38,7 +38,7 @@ export const productosService = {
   // Obtener un producto por ID
   obtenerProductoPorId: async (id) => {
     try {
-      const response = await api.get(`/productos/${id}`);
+      const response = await api.get('/productos/' + id);
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -48,7 +48,7 @@ export const productosService = {
   // Actualizar un producto
   actualizarProducto: async (id, producto) => {
     try {
-      const response = await api.put(`/productos/${id}`, producto);
+      const response = await api.put('/productos/' + id, producto);
       return response.data;
     } catch (error) {
       throw error.response?.data || error.message;
@@ -58,7 +58,7 @@ export const productosService = {
   // Eliminar un producto
   eliminarProducto: async (id) => {
     try {
-      const response = await api.delete(`/productos/${id}`);
+      const response = await api.delete('/productos/' + id);
       return response.data;
     } catch (error) {
       // Pasar el objeto de error completo para mejor manejo
@@ -71,5 +71,37 @@ export const productosService = {
   },
 };
 
-export default api;
+// Servicio de Pedidos
+export const pedidosService = {
+  // Crear un nuevo pedido
+  crearPedido: async (pedido) => {
+    try {
+      const response = await api.post('/pedidos', pedido);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error.message;
+    }
+  },
 
+  // Obtener todos los pedidos
+  obtenerPedidos: async () => {
+    try {
+      const response = await api.get('/pedidos');
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error.message;
+    }
+  },
+
+  // Obtener un pedido por ID
+  obtenerPedidoPorId: async (id) => {
+    try {
+      const response = await api.get('/pedidos/' + id);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error.message;
+    }
+  },
+};
+
+export default api;
