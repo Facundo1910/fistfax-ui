@@ -82,7 +82,7 @@ const Productos = () => {
       setProductoEditando(null);
       cargarProductos();
     } catch (err) {
-      setError(`Error al ${productoEditando ? 'actualizar' : 'crear'} producto: ` + (err.message || 'Error desconocido'));
+      setError('Error al ' + (productoEditando ? 'actualizar' : 'crear') + ' producto: ' + (err.message || 'Error desconocido'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -116,12 +116,12 @@ const Productos = () => {
       const errorStatus = err.status || (err.error === 'Internal Server Error' ? 500 : null);
       const errorMessage = err.message || err.error || '';
       const errorString = JSON.stringify(err).toLowerCase();
-      
+
       let mensaje = 'Error al eliminar producto';
       let esRestriccionPedido = false;
-      
+
       if (
-        errorStatus === 500 || 
+        errorStatus === 500 ||
         err.error === 'Internal Server Error' ||
         errorString.includes('constraint') ||
         errorString.includes('foreign key') ||
@@ -140,13 +140,13 @@ const Productos = () => {
         mensaje = 'No tienes permisos para eliminar este producto.';
         setErrorType('error');
       } else {
-        mensaje = `Error al eliminar producto: ${errorMessage || 'Error desconocido'}`;
+        mensaje = 'Error al eliminar producto: ' + (errorMessage || 'Error desconocido');
         setErrorType('error');
       }
-      
+
       setError(mensaje);
       console.error('Error al eliminar:', err);
-      
+
       if (esRestriccionPedido) {
         setMensajeModal('Este producto no puede ser eliminado porque está asociado a pedidos existentes.\n\nPara eliminarlo, primero debes eliminar o modificar los pedidos que lo contienen.');
         setMostrarModal(true);
@@ -251,7 +251,7 @@ const Productos = () => {
       </div>
 
       {error && (
-        <div className={`alert ${errorType === 'warning' ? 'alert-warning' : 'alert-error'}`}>
+        <div className={'alert ' + (errorType === 'warning' ? 'alert-warning' : 'alert-error')}>
           {error}
         </div>
       )}
@@ -322,7 +322,7 @@ const Productos = () => {
                 autoComplete="off"
               />
               {mostrarDropdownProveedor && proveedoresFiltrados.length > 0 && (
-                <ul 
+                <ul
                   ref={dropdownRef}
                   className="proveedor-dropdown"
                   onMouseDown={(e) => e.preventDefault()}
@@ -414,7 +414,7 @@ const Productos = () => {
                 ))}
               </tbody>
             </table>
-            
+
             {totalPaginas > 1 && (
               <div className="pagination-controls">
                 <button
@@ -425,32 +425,32 @@ const Productos = () => {
                 >
                   Anterior
                 </button>
-                
+
                 <div className="pagination-numbers">
                   {(() => {
                     const paginas = [];
                     const mostrarElipsis = totalPaginas > 7;
-                    
+
                     if (mostrarElipsis) {
                       paginas.push(1);
-                      
+
                       if (paginaActual > 3) {
                         paginas.push('ellipsis-start');
                       }
-                      
+
                       const inicio = Math.max(2, paginaActual - 1);
                       const fin = Math.min(totalPaginas - 1, paginaActual + 1);
-                      
+
                       for (let i = inicio; i <= fin; i++) {
                         if (i !== 1 && i !== totalPaginas) {
                           paginas.push(i);
                         }
                       }
-                      
+
                       if (paginaActual < totalPaginas - 2) {
                         paginas.push('ellipsis-end');
                       }
-                      
+
                       if (totalPaginas > 1) {
                         paginas.push(totalPaginas);
                       }
@@ -459,7 +459,7 @@ const Productos = () => {
                         paginas.push(i);
                       }
                     }
-                    
+
                     return paginas.map((item) => {
                       if (item === 'ellipsis-start' || item === 'ellipsis-end') {
                         return (
@@ -468,11 +468,11 @@ const Productos = () => {
                           </span>
                         );
                       }
-                      
+
                       return (
                         <button
                           key={item}
-                          className={`btn btn-pagination ${item === paginaActual ? 'active' : ''}`}
+                          className={'btn btn-pagination ' + (item === paginaActual ? 'active' : '')}
                           onClick={() => cambiarPagina(item)}
                           disabled={loading}
                         >
@@ -482,7 +482,7 @@ const Productos = () => {
                     });
                   })()}
                 </div>
-                
+
                 <button
                   className="btn btn-pagination"
                   onClick={() => cambiarPagina(paginaActual + 1)}
@@ -498,8 +498,8 @@ const Productos = () => {
       </div>
 
       {mostrarModal && (
-        <dialog 
-          className="modal-overlay" 
+        <dialog
+          className="modal-overlay"
           open
           onCancel={(e) => {
             e.preventDefault();
@@ -510,8 +510,8 @@ const Productos = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h3 id="modal-title">No se puede eliminar el producto</h3>
-              <button 
-                className="modal-close" 
+              <button
+                className="modal-close"
                 onClick={() => setMostrarModal(false)}
                 aria-label="Cerrar"
                 type="button"
@@ -523,8 +523,8 @@ const Productos = () => {
               <p>{mensajeModal}</p>
             </div>
             <div className="modal-footer">
-              <button 
-                className="btn btn-primary" 
+              <button
+                className="btn btn-primary"
                 onClick={() => setMostrarModal(false)}
                 type="button"
               >
@@ -539,4 +539,3 @@ const Productos = () => {
 };
 
 export default Productos;
-

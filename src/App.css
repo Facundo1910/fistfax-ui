@@ -25,9 +25,63 @@
   font-weight: 600;
 }
 
+.App-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background-color: var(--color-bg-light);
+  border-bottom: 3px solid var(--color-olive-dark);
+  box-shadow: 0 2px 8px rgba(74, 93, 35, 0.1);
+}
+
+.nav-button {
+  padding: 0.75rem 2rem;
+  border: 2px solid var(--color-olive-dark);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--color-olive-dark);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: var(--color-olive-medium);
+  color: var(--color-text-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 93, 35, 0.2);
+}
+
+.nav-button.active {
+  background-color: var(--color-olive-dark);
+  color: var(--color-text-light);
+  box-shadow: 0 4px 12px rgba(74, 93, 35, 0.3);
+}
+
+.nav-button.active:hover {
+  background-color: var(--color-olive-medium);
+}
+
 .App-main {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
 
+@media (max-width: 768px) {
+  .App-nav {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .nav-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    flex: 1;
+  }
+}
